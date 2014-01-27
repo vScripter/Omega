@@ -15,6 +15,17 @@
     <Property name="Text">Omega</Property>
     <Event name="FormClosed">formMain_FormClosed</Event>
     <Event name="Load">OnLoadFormEvent</Event>
+    <Object type="System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="buttonADServicesCheck" children="Controls">
+      <Property name="Anchor">None</Property>
+      <Property name="BackColor">ButtonFace</Property>
+      <Property name="Location">616, 248</Property>
+      <Property name="Name">buttonADServicesCheck</Property>
+      <Property name="Size">120, 24</Property>
+      <Property name="TabIndex">59</Property>
+      <Property name="Text">AD Services Check</Property>
+      <Property name="UseVisualStyleBackColor">False</Property>
+      <Event name="Click">buttonADServicesCheck_Click</Event>
+    </Object>
     <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelCommunityEdition" children="Controls">
       <Property name="BackColor">Transparent</Property>
       <Property name="Font">Segoe Print, 8.25pt, style=Italic</Property>
@@ -535,7 +546,7 @@ Omega - Community Edition (Omega-CE)
 
 # Set the App version information which gets displayed in the bottom right hand corner of the app
 # Make sure to update this when you publish an update
-$AppVersion = "Copyright (C) 2013 GPLv2     Omega CE     v1.1.5"
+$AppVersion = "Copyright (C) 2013 GPLv2     Omega CE     v1.1.6"
 
 $OnLoadFormEvent={
 	
@@ -1558,6 +1569,44 @@ $buttonNetAppOCSM_Click={
 	
 }# End $buttonNetAppOCSM_Click
 
+$buttonADServicesCheck_Click={
+	
+	# Standard input/server check.
+        if ((ServerInput) -or (!(TestConnection)))
+                {
+                        ServerDown
+                } # end if
+        
+        
+        else{
+                $Server = $rtbServer.Text.Trim()
+                $lbStatus.ForeColor = "Green"
+                $lbStatus.Text = "Getting Services..."
+                
+        if ($ServerServices) {Remove-Variable ServerServices}
+        
+        $dgvServer.ColumnCount = 0 
+    $dgvServer.ColumnCount = 4
+        $dgvServer.Columns[0].Name = "Server"        
+        $dgvServer.Columns[1].Name = "Service" 
+    $dgvServer.Columns[2].Name = "Status" 
+    $dgvServer.Columns[3].Name = "Display Name" 
+         
+        $ServerServices = Get-Service -ComputerName $Server -Name dhcpserver,dns,wins,adws,ntds -ErrorAction 'SilentlyContinue'                
+    if ($ServerServices){    
+                foreach($Svc in $ServerServices) 
+            {                                         
+                                $Win32Computer = WMIServerName
+                                $ServerName = $Win32Computer.Caption.ToUpper()
+                $dgvServer.Rows.Add($ServerName,$Svc.Name,$Svc.Status,$Svc.DisplayName)                                                                                                             
+            }
+                        
+                        
+                }$lbStatus.Text = $null
+        }
+	
+}# End $buttonADServicesCheck_Click
+
 $formMain_FormClosed=[System.Windows.Forms.FormClosedEventHandler]{
 #Event Argument: $_ = [System.Windows.Forms.FormClosedEventArgs]
 	#Stop any pending jobs
@@ -1691,6 +1740,8 @@ function Load-DataGridView
 }
 #endregion
 
+
+
 ]]></Code>
   <Mode>1</Mode>
   <Assemblies>
@@ -1732,7 +1783,8 @@ function Load-DataGridView
       <ProductVersion>1.0.0.0</ProductVersion>
       <ProductName>Omega Tool</ProductName>
       <Description>Omega Tool</Description>
-      <Company></Company>
+      <Company>
+      </Company>
       <Copyright>GPLv2 (C) K. Kirkpatrick</Copyright>
       <InternalName>
       </InternalName>
