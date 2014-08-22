@@ -1,0 +1,53 @@
+﻿<Project>
+  <Version>1</Version>
+  <FileID>e38a3743-4d2e-472a-9f18-b08df212a2a3</FileID>
+  <ProjectType>0</ProjectType>
+  <Files>
+    <File ReferenceName="" Build="0">Startup.pfs</File>
+    <File ReferenceName="Call-MainForm_pff" Build="0">MainForm.pff</File>
+    <File ReferenceName="Call-Global_ps1" Build="0" CommandExtension="True">Globals.ps1</File>
+    <File ReferenceName="Call-WMIServerInventory_pff" Build="0">WMIServerInventory.pff</File>
+    <File ReferenceName="Call-PrintServerInventory_pff" Build="0">PrintServerInventory.pff</File>
+    <File ReferenceName="Call-Reports_pff" Build="0">Reports.pff</File>
+    <File ReferenceName="Call-ConfirmRestart_pff" Build="0">ConfirmRestart.pff</File>
+    <File ReferenceName="Call-Toolbox_pff" Build="0">Toolbox.pff</File>
+  </Files>
+  <Packager>
+    <General>
+      <PackageName>Omega</PackageName>
+      <PackageIcon>C:\Users\Kevin\Documents\Git\Omega\Icons\omega.ico</PackageIcon>
+      <ManifestCreation>1</ManifestCreation>
+      <CustomManifest>
+      </CustomManifest>
+      <Platform>1</Platform>
+      <RunSTA>1</RunSTA>
+      <PowerShellVersion>2</PowerShellVersion>
+    </General>
+    <Security>
+      <Username>
+      </Username>
+      <Password>
+      </Password>
+      <SignPackage>False</SignPackage>
+      <Certificate>
+      </Certificate>
+      <CertificatePassword>
+      </CertificatePassword>
+      <RunAs>0</RunAs>
+    </Security>
+    <Version>
+      <FileVersion>1.1.7.0</FileVersion>
+      <ProductVersion>1.1.7.0</ProductVersion>
+      <ProductName>Omega Tool Community Edition</ProductName>
+      <Description>Omega</Description>
+      <Company>
+      </Company>
+      <Copyright>2014 GPLv3 K. Kirkpatrick</Copyright>
+      <InternalName>Omega</InternalName>
+      <OriginalFileName>
+      </OriginalFileName>
+      <Comment>
+      </Comment>
+    </Version>
+  </Packager>
+</Project>
